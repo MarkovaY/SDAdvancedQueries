@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class CommandLineRunnerImpl implements CommandLineRunner {
@@ -53,7 +55,51 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 
 //        4. Write a program that prints the titles of all books that are NOT released in a given year.
 
-        printAllBooksWithReleaseDateDifferentThan();
+//        printAllBooksWithReleaseDateDifferentThan();
+
+
+//        5. Write a program that prints the title, the edition type and the price of books, which are released before a given date.
+//        The date will be in the format dd-MM-yyyy.
+
+//        findAllBooksReleasedBeforeDate();
+
+
+//        6. Write a program that prints the names of those authors, whose first name ends with a given string.
+
+//        findNamesOfAuthorsWithFirstNameFinishingBy();
+
+
+//        7. Write a program that prints the titles of books, which contain a given string (regardless of the casing).
+
+//        printAllBooksContainingTheString();
+
+
+//        8. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
+
+//        printBooksWithAuthorLastNameStartingWith();
+    }
+
+    private void printBooksWithAuthorLastNameStartingWith() throws IOException {
+        String nameStart = bufferedReader.readLine();
+        bookService.findAllBooksWithAuthorLastNameStartingWith(nameStart)
+                .forEach(book -> System.out.printf("%s (%s %s)%n", book.getTitle(), book.getAuthor().getFirstName(), book.getAuthor().getLastName()));
+    }
+
+    private void printAllBooksContainingTheString() throws IOException {
+        String string = bufferedReader.readLine();
+        bookService.findAllBooksContaining(string).forEach(System.out::println);
+    }
+
+    private void findNamesOfAuthorsWithFirstNameFinishingBy() throws IOException {
+        String endOfName = bufferedReader.readLine();
+        authorService.findNamesOfAuthorsWithFirstNameFinishingBy(endOfName)
+                .forEach(author -> System.out.printf("%s %s%n", author.getFirstName(), author.getLastName()));
+    }
+
+    private void findAllBooksReleasedBeforeDate() throws IOException {
+        LocalDate localDate = LocalDate.parse(bufferedReader.readLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        bookService.findAllBooksReleasedBefore(localDate)
+                .forEach(book -> System.out.printf("%s %s %.2f%n", book.getTitle(), book.getEditionType(), book.getPrice()));
     }
     private void printAllBooksWithReleaseDateDifferentThan() throws IOException {
         int year = Integer.parseInt(bufferedReader.readLine());

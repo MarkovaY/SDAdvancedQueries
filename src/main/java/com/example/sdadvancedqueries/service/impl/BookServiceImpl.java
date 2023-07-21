@@ -110,6 +110,25 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Book> findAllBooksReleasedBefore(LocalDate date) {
+        return bookRepository.findAllByReleaseDateBefore(date);
+    }
+
+    @Override
+    public List<String> findAllBooksContaining(String string) {
+
+        return bookRepository.findAllByTitleContainingIgnoreCase(string)
+                .stream()
+                .map(Book::getTitle)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Book> findAllBooksWithAuthorLastNameStartingWith(String nameStart) {
+        return bookRepository.findAllByAuthor_LastNameStartingWithIgnoreCase(nameStart);
+    }
+
     private Book createBookFromInfo(String[] bookInfo) {
         EditionType editionType = EditionType.values()[Integer.parseInt(bookInfo[0])];
         LocalDate releaseDate = LocalDate

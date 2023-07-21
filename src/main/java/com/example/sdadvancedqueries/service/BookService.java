@@ -4,6 +4,7 @@ import com.example.sdadvancedqueries.model.entity.AgeRestriction;
 import com.example.sdadvancedqueries.model.entity.Book;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookService {
@@ -22,4 +23,10 @@ public interface BookService {
     List<Book> printAllBookTitlesAndPricesWithPriceLessThan5OrMoreThan40();
 
     List<String> findAllBooksWithReleaseDateDifferentThan(int year);
+
+    List<Book> findAllBooksReleasedBefore(LocalDate date);
+
+    List<String> findAllBooksContaining(String string);
+
+    List<Book> findAllBooksWithAuthorLastNameStartingWith(String nameStart);
 }

@@ -4,7 +4,6 @@ import com.example.sdadvancedqueries.model.entity.AgeRestriction;
 import com.example.sdadvancedqueries.model.entity.Book;
 import com.example.sdadvancedqueries.model.entity.EditionType;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -27,4 +26,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByPriceBeforeOrPriceAfter(BigDecimal priceLow, BigDecimal priceHigh);
 
     List<Book> findAllByReleaseDateBeforeOrReleaseDateAfter(LocalDate start, LocalDate end);
+
+    List<Book> findAllByTitleContainingIgnoreCase(String string);
+
+    List<Book> findAllByAuthor_LastNameStartingWithIgnoreCase(String nameStart);
 }
