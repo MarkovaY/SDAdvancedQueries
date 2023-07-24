@@ -77,6 +77,25 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 //        8. Write a program that prints the titles of books, which are written by authors, whose last name starts with a given string.
 
 //        printBooksWithAuthorLastNameStartingWith();
+
+
+//        9. Write a program that prints the number of books, whose title is longer than a given number.
+
+//        printNumberOfBooksWithTitleLongerThan();
+
+
+//        10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
+
+        printTotalBookCopiesByAuthorDesc();
+    }
+
+    private void printTotalBookCopiesByAuthorDesc() {
+        authorService.printTotalBookCopiesByAuthorDesc().forEach(System.out::println);
+    }
+
+    private void printNumberOfBooksWithTitleLongerThan() throws IOException {
+        int lengthOfTitle = Integer.parseInt(bufferedReader.readLine());
+        System.out.println(bookService.printNumberOfBooksWithTitleLongerThan(lengthOfTitle));
     }
 
     private void printBooksWithAuthorLastNameStartingWith() throws IOException {

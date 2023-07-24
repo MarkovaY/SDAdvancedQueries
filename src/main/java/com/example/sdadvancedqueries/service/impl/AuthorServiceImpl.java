@@ -1,6 +1,7 @@
 package com.example.sdadvancedqueries.service.impl;
 
 import com.example.sdadvancedqueries.model.entity.Author;
+import com.example.sdadvancedqueries.model.entity.Book;
 import com.example.sdadvancedqueries.repository.AuthorRepository;
 import com.example.sdadvancedqueries.service.AuthorService;
 import org.springframework.stereotype.Service;
@@ -66,5 +67,19 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findNamesOfAuthorsWithFirstNameFinishingBy(String letter) {
 
         return authorRepository.findAllByFirstNameEndingWith(letter);
+    }
+
+    @Override
+    public List<String> printTotalBookCopiesByAuthorDesc() {
+
+        return authorRepository
+                .findAll()
+                .stream()
+                .map(author -> String.format("%s %s - %d", author.getFirstName(), author.getLastName(), author
+                        .getBooks()
+                        .stream()
+                        .map(Book::getCopies)
+                        .reduce(Integer::sum)
+                        .orElse(0))).collect(Collectors.toList());
     }
 }
