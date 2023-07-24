@@ -86,7 +86,19 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 
 //        10. Write a program that prints the total number of book copies by author. Order the results descending by total book copies.
 
-        printTotalBookCopiesByAuthorDesc();
+//        printTotalBookCopiesByAuthorDesc();
+
+
+//        11. Write a program that prints information (title, edition type, age restriction and price) for a book by given title.
+//        When retrieving the book information select only those fields and do NOT include any other information in the returned result.
+
+        printBookTitleEditionAgeRestrictionAndPriceByNameGiven();
+
+    }
+
+    private void printBookTitleEditionAgeRestrictionAndPriceByNameGiven() throws IOException {
+        String titleGiven = bufferedReader.readLine();
+        System.out.println(bookService.findBookInformationByTitle(titleGiven));
     }
 
     private void printTotalBookCopiesByAuthorDesc() {
