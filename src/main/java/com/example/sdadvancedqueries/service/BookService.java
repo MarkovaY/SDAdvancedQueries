@@ -28,5 +28,5 @@ public interface BookService {
 
     List<String> findAllBooksContaining(String string);
 
-    List<Book> findAllBooksWithAuthorLastNameStartingWith(String nameStart);
+    List<String> findAllBooksWithAuthorLastNameStartingWith(String nameStart);
 }

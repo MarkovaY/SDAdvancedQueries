@@ -125,8 +125,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAllBooksWithAuthorLastNameStartingWith(String nameStart) {
-        return bookRepository.findAllByAuthor_LastNameStartingWithIgnoreCase(nameStart);
+    public List<String> findAllBooksWithAuthorLastNameStartingWith(String nameStart) {
+        return bookRepository.findAllByAuthor_LastNameStartingWithIgnoreCase(nameStart)
+                .stream()
+                .map(book -> String.format("%s (%s %s)", book.getTitle(), book.getAuthor().getFirstName(), book.getAuthor().getLastName()))
+                .collect(Collectors.toList());
     }
 
     private Book createBookFromInfo(String[] bookInfo) {

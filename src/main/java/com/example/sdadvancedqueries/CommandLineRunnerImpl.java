@@ -82,7 +82,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     private void printBooksWithAuthorLastNameStartingWith() throws IOException {
         String nameStart = bufferedReader.readLine();
         bookService.findAllBooksWithAuthorLastNameStartingWith(nameStart)
-                .forEach(book -> System.out.printf("%s (%s %s)%n", book.getTitle(), book.getAuthor().getFirstName(), book.getAuthor().getLastName()));
+                .forEach(System.out::println);
     }
 
     private void printAllBooksContainingTheString() throws IOException {
